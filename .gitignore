@@ -1,2 +1,4 @@
 .idea*
 api_token.txt
+*__pycache*
+venv/*
