@@ -29,8 +29,15 @@ class MediaListResponse:
     def __init__(self, response: json):
         self.image_info_list = list()
         for image_info in response['data']:
-            self.image_info_list.append(ImageInfo(image_info['id'], image_info['caption']))
+            self.image_info_list.append(
+                ImageInfo(image_info['id'], image_info['caption'])
+            )
+
+        paging_next = None
+        try:
+            paging_next = response['paging']['next']
+        except KeyError:
+            pass
 
         self.paging_info = PagingInfo(PagingCursors(response['paging']['cursors']['before'],
-                                                    response['paging']['cursors']['after']),
-                                      response['paging']['next'])
+                                                    response['paging']['cursors']['after']), paging_next)
