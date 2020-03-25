@@ -1,4 +1,6 @@
 import requests
+from requests import Response
+
 from models.dto.user_info_model import UserInfoDto
 
 
@@ -12,14 +14,14 @@ class InstagramApiClient:
         self.api_token = token_file.readline()
         self.user_info = UserInfoDto.from_json(self.get_user_info().content)
 
-    def get_user_info(self):
+    def get_user_info(self) -> Response:
         url = self.instagram_base_path + 'me?fields=id,username&access_token=' + self.api_token
         return requests.get(url)
 
-    def get_user_media_list(self):
+    def get_user_media_list(self) -> Response:
         url = self.instagram_base_path + self.user_info.id + '/media?fields=id,caption&access_token=' + self.api_token
         return requests.get(url)
 
-    def get_media_url(self, media_id: str):
+    def get_media_url(self, media_id: str) -> Response:
         url = self.instagram_base_path + media_id + '?fields=media_url&access_token=' + self.api_token
         return requests.get(url)

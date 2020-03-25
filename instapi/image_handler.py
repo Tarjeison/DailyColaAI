@@ -1,3 +1,5 @@
+from typing import List
+
 from instapi.image_repository import InstagramRepository
 from os import listdir
 from os.path import isfile, join, splitext
@@ -29,6 +31,6 @@ class ImageHandler:
             file.write(image_raw)
             file.close()
 
-    def get_all_file_names_in_folder(self):
+    def get_all_file_names_in_folder(self) -> List[str]:
         file_names = [splitext(f)[0] for f in listdir(self.root_folder) if isfile(join(self.root_folder, f))]
         return file_names
