@@ -1,2 +1,4 @@
+numpy
 requests
 dataclasses_json
+opencv_python
