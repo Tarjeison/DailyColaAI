@@ -1,8 +1,5 @@
-from typing import List
-
 from instapi.image_repository import InstagramRepository
-from os import listdir
-from os.path import isfile, join, splitext
+from utils.file_utilites import get_all_file_names_in_folder
 
 
 class ImageHandler:
@@ -18,7 +15,7 @@ class ImageHandler:
     def update_image_folder(self):
         print('Updating images...')
         image_ids_repo = self.image_repository.get_all_image_ids()
-        image_ids_folder = self.get_all_file_names_in_folder()
+        image_ids_folder = get_all_file_names_in_folder(self.root_folder)
         new_image_ids = list(set(image_ids_repo) - set(image_ids_folder))
         print('Found {} new images'.format(len(new_image_ids)))
 
@@ -30,7 +27,3 @@ class ImageHandler:
             file = open(self.root_folder + image_id + self.image_extension, 'wb')
             file.write(image_raw)
             file.close()
-
-    def get_all_file_names_in_folder(self) -> List[str]:
-        file_names = [splitext(f)[0] for f in listdir(self.root_folder) if isfile(join(self.root_folder, f))]
-        return file_names
