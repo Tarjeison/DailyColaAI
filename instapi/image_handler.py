@@ -1,5 +1,5 @@
 from instapi.image_repository import InstagramRepository
-from utils.file_utilites import get_all_file_names_in_folder
+from utils.file_utils import get_all_file_names_in_folder, create_directory_if_not_present
 
 
 class ImageHandler:
@@ -7,9 +7,11 @@ class ImageHandler:
     root_folder: str
     image_extension: str
 
-    def __init__(self, image_repository: InstagramRepository, root_folder: str, image_extension: str = '.jpg'):
+    def __init__(self, image_repository: InstagramRepository,
+                 root_folder: str = 'data/images/raw/', image_extension: str = '.jpg'):
         self.image_repository = image_repository
         self.root_folder = root_folder
+        create_directory_if_not_present(root_folder)
         self.image_extension = image_extension
 
     def update_image_folder(self):

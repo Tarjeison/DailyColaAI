@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-from utils.file_utilites import get_all_file_names_in_folder
+from utils.file_utils import get_all_file_names_in_folder, create_directory_if_not_present
 
 
 class PreProcessor:
@@ -11,12 +11,14 @@ class PreProcessor:
     processed_images_root: str
     raw_image_extension: str
 
-    def __init__(self, images_root: str = 'images/raw/', processed_images_root: str = 'images/pre_processed/',
-                 image_heigth: int = 720, image_width: int = 720):
-        self.image_height = image_heigth
+    def __init__(self, images_root: str = 'data/images/raw/',
+                 processed_images_root: str = 'data/images/pre_processed/1/',
+                 image_height: int = 256, image_width: int = 256):
+        self.image_height = image_height
         self.image_width = image_width
         self.images_root = images_root
         self.processed_images_root = processed_images_root
+        create_directory_if_not_present(processed_images_root)
 
     def update_processed_images(self):
         print('Started pre-processing... Looking for un-processed images.')

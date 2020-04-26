@@ -10,7 +10,7 @@ from models.dto.media_list_information import MediaListResponse
 class InstagramRepository:
     apiClient: InstagramApiClient
 
-    def __init__(self, api_token):
+    def __init__(self, api_token) -> object:
         self.apiClient = InstagramApiClient(api_token)
 
     def get_all_image_ids(self) -> List[str]:
