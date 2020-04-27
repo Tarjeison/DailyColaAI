@@ -9,13 +9,13 @@ from generation.GAN.generator import GeneratorNet
 from utils.logger import Logger
 
 
-def train_gan():
+def train_gan(model_name: str, data_name: str) -> None:
     # Load data
     data = datasets.ImageFolder(root='data/images/pre_processed/', transform=transforms.Compose([
         transforms.Grayscale(), transforms.ToTensor()
     ]))
     # Create loader with data, so that we can iterate over it
-    data_loader = torch.utils.data.DataLoader(data, batch_size=10, shuffle=True)
+    data_loader = torch.utils.data.DataLoader(data, batch_size=30, shuffle=True)
     # Num batches
     num_batches = len(data_loader)
     discriminator = DiscriminatorNet()
@@ -25,7 +25,7 @@ def train_gan():
     test_noise = noise(num_test_samples)
 
     # Create logger instance
-    logger = Logger(model_name='daily_bin', data_name='final3')
+    logger = Logger(model_name=model_name, data_name=data_name)
     # Total number of epochs to train
     num_epochs = 100
     for epoch in range(num_epochs):
@@ -59,3 +59,7 @@ def train_gan():
                     epoch, num_epochs, n_batch, num_batches,
                     d_error, g_error, d_pred_real, d_pred_fake
                 )
+
+            # Dummy exit condition
+            if epoch == 100:
+                return

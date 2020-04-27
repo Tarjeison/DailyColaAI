@@ -70,13 +70,13 @@ class Logger:
         Logger._make_dir(out_dir)
 
         # Plot and save horizontal
-        fig = plt.figure(figsize=(16, 16))
-        plt.imshow(np.moveaxis(horizontal_grid.numpy(), 0, -1))
-        plt.axis('off')
-        if plot_horizontal:
-            display.display(plt.gcf())
-        self._save_images(fig, epoch, n_batch, 'hori')
-        plt.close()
+        # fig = plt.figure(figsize=(16, 16))
+        # plt.imshow(np.moveaxis(horizontal_grid.numpy(), 0, -1))
+        # plt.axis('off')
+        # if plot_horizontal:
+        #     display.display(plt.gcf())
+        # self._save_images(fig, epoch, n_batch, 'hori')
+        # plt.close()
 
         # Save squared
         fig = plt.figure()
