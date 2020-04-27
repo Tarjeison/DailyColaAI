@@ -16,22 +16,22 @@ class DiscriminatorNet(torch.nn.Module):
         n_out = 1
 
         self.hidden0 = nn.Sequential(
-            nn.Linear(n_features, 512),
+            nn.Linear(n_features, 128),
             nn.LeakyReLU(0.2),
             nn.Dropout(0.3)
         )
         self.hidden1 = nn.Sequential(
-            nn.Linear(512, 256),
+            nn.Linear(128, 64),
             nn.LeakyReLU(0.2),
             nn.Dropout(0.3)
         )
         self.hidden2 = nn.Sequential(
-            nn.Linear(256, 64),
+            nn.Linear(64, 32),
             nn.LeakyReLU(0.2),
             nn.Dropout(0.3)
         )
         self.out = nn.Sequential(
-            torch.nn.Linear(64, n_out),
+            torch.nn.Linear(32, n_out),
             torch.nn.Sigmoid()
         )
 
