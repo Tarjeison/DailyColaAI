@@ -5,3 +5,7 @@ numpy
 requests
 dataclasses_json
 opencv_python
+tensorboardX
+IPyhton
+matplotlib
+opencv-python-headless
