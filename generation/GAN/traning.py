@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 import torch
 from torch import nn, utils
 from torch.autograd.variable import Variable
@@ -29,6 +31,10 @@ def train_gan(model_name: str, data_name: str) -> None:
     # Total number of epochs to train
     num_epochs = 100
     for epoch in range(num_epochs):
+        if logger.execution_time > timedelta(minutes=1):
+            # TODO: Find more elegant solution to this
+            print("Error: GAN build timeout")
+            return
         for n_batch, (real_batch, _) in enumerate(data_loader):
             N = real_batch.size(0)
             # 1. Train Discriminator
@@ -60,6 +66,6 @@ def train_gan(model_name: str, data_name: str) -> None:
                     d_error, g_error, d_pred_real, d_pred_fake
                 )
 
-            # Dummy exit condition
+            # TODO: Find appropriate exit condition
             if epoch == 100:
                 return

@@ -1,4 +1,6 @@
 import os
+from datetime import datetime, timedelta
+
 import numpy as np
 import errno
 import torchvision.utils as vutils
@@ -17,6 +19,8 @@ class Logger:
     def __init__(self, model_name, data_name):
         self.model_name = model_name
         self.data_name = data_name
+        self.start_time = datetime.now()
+        self.execution_time = timedelta(0)
 
         self.comment = '{}_{}'.format(model_name, data_name)
         self.data_subdir = '{}/{}'.format(model_name, data_name)
@@ -32,6 +36,7 @@ class Logger:
         if isinstance(g_error, torch.autograd.Variable):
             g_error = g_error.data.cpu().numpy()
 
+        self.execution_time = datetime.now() - self.start_time
         step = Logger._step(epoch, n_batch, num_batches)
         self.writer.add_scalar(
             '{}/D_error'.format(self.comment), d_error, step)
