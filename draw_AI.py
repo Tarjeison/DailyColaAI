@@ -17,11 +17,11 @@ if __name__ == '__main__':
 
     # Build the model of the day
     timestamp = str(datetime.now())
-    timestamp = timestamp.strip(' ')
     model_name = 'daily_cola'
     train_gan(model_name='daily_cola', data_name=timestamp)
 
     # Publish image with last model result
+    # TODO: Revise and move some logic away from main
     img_root_path = 'data/images/generated/{}/{}'.format(model_name, timestamp)
     generated_images = get_all_file_names_in_folder(img_root_path)
     generated_images.sort()
@@ -30,6 +30,5 @@ if __name__ == '__main__':
     email_password = email_password_fd.readline()
     email_recipient_fd = open('data/secrets/email_recipient.txt', "r")
     email_recipient = email_recipient_fd.readline()
-    print(email_password)
     send_email_with_image_attachment(img_path, 'dailycolaai@gmail.com', email_password,
                                      'dailcolaai@gmail.com', email_recipient)
