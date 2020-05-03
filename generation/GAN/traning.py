@@ -29,9 +29,9 @@ def train_gan(model_name: str, data_name: str) -> None:
     # Create logger instance
     logger = Logger(model_name=model_name, data_name=data_name)
     # Total number of epochs to train
-    num_epochs = 100
+    num_epochs = 1000
     for epoch in range(num_epochs):
-        if logger.execution_time > timedelta(minutes=1):
+        if logger.execution_time > timedelta(hours=1):
             # TODO: Find more elegant solution to this
             print("Error: GAN build timeout")
             return
@@ -67,5 +67,5 @@ def train_gan(model_name: str, data_name: str) -> None:
                 )
 
             # TODO: Find appropriate exit condition
-            if epoch == 100:
+            if epoch == 150:
                 return
