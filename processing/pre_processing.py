@@ -42,5 +42,5 @@ class PreProcessor:
 
     def remove_image_noise(self, img: np.ndarray):
         gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        (_, blackAndWhiteImage) = cv2.threshold(gray_image, 150, 255, cv2.THRESH_BINARY)
+        (_, blackAndWhiteImage) = cv2.threshold(gray_image, 130, 255, cv2.THRESH_BINARY)
         return blackAndWhiteImage
