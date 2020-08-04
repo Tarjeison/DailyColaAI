@@ -20,7 +20,7 @@ class InstagramRepository:
         media_list_response.raise_for_status()
 
         media_list = MediaListResponse(media_list_response.json())
-
+        # fancy
         image_ids += [media_info.id for media_info in media_list.image_info_list]
         while media_list.paging_info.next is not None:
             media_list_response = requests.get(media_list.paging_info.next)
